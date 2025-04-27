@@ -16,7 +16,17 @@ public class MultiSensorRobot {
     static volatile boolean avoidObstacle = false;
 
     public static void main(String[] args) {
-        // Placeholder for code
     }
 
+}
+
+public static void main(String[] args) {
+    LightSensor.calibrate();  // Calibrate the light sensor
+
+    LCD.clear();
+    LCD.drawString("Press to Start", 0, 1);
+    Button.waitForAnyPress();
+    LCD.clear();
+
+   
 }
