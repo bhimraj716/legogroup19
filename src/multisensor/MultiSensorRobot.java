@@ -28,5 +28,9 @@ public static void main(String[] args) {
     Button.waitForAnyPress();
     LCD.clear();
 
+    Thread lineFollower = new Thread(new LineFollower());  // Start LineFollower thread
+    lineFollower.start();
+
+
    
 }
