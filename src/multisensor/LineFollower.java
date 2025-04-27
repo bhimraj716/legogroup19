@@ -11,5 +11,14 @@ public class LineFollower implements Runnable {
         int minMotorSpeed = 0;
         float proportionalGain = 700;
 
+        while (!Button.ESCAPE.isDown()) {
+            if (MultiSensorRobot.avoidObstacle) {
+                Delay.msDelay(100);
+                continue;
+            }
+            float currentLight = LightSensor.getLightValue();
+            float deviation = currentLight - LightSensor.getThreshold();
+        }
+
     }
 }
