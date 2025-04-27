@@ -15,37 +15,34 @@ public class MultiSensorRobot {
 
     static volatile boolean avoidObstacle = false;
 
-}
+    public static void main(String[] args) {
+        LightSensor.calibrate(); // Calibrate the light sensor
 
-public static void main(String[] args) {
-    LightSensor.calibrate();  // Calibrate the light sensor
+        LCD.clear();
+        LCD.drawString("Press to Start", 0, 1);
+        Button.waitForAnyPress();
+        LCD.clear();
 
-    LCD.clear();
-    LCD.drawString("Press to Start", 0, 1);
-    Button.waitForAnyPress();
-    LCD.clear();
+        Thread lineFollower = new Thread(new LineFollower()); // Start LineFollower thread
+        lineFollower.start();
 
-    Thread lineFollower = new Thread(new LineFollower());  // Start LineFollower thread
-    lineFollower.start();
+        while (!Button.ESCAPE.isDown()) { // Main loop running until ESCAPE button is pressed
+            Delay.msDelay(100); // Wait for a short time
+        }
+        // Stop the motors safely
+        synchronized (motorLock) {
+            leftMotor.stop();
+            rightMotor.stop();
+        }
 
+        // Shutdown sensors and motors
+        LightSensor.shutdown();
+        leftMotor.close();
+        rightMotor.close();
 
-    while (!Button.ESCAPE.isDown()) {  // Main loop running until ESCAPE button is pressed
-        Delay.msDelay(100);  // Wait for a short time
+        // Display stopped message
+        LCD.clear();
+        LCD.drawString("Stopped", 0, 0);
+
     }
- // Stop the motors safely
- synchronized (motorLock) {
-    leftMotor.stop();
-    rightMotor.stop();
-}
-
-// Shutdown sensors and motors
-LightSensor.shutdown();
-leftMotor.close();
-rightMotor.close();
-
-// Display stopped message
-LCD.clear();
-LCD.drawString("Stopped", 0, 0);
-
-   
 }
