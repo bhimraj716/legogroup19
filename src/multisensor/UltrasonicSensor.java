@@ -46,6 +46,11 @@ public class UltrasonicSensor implements Runnable {
         while (!Thread.interrupted() && !Button.ESCAPE.isDown()) {
             float distance = getDistance();
             Delay.msDelay(100);
-        }
+       }
+public void run() {
+    while (!Thread.interrupted() && !Button.ESCAPE.isDown()) {
+        float distance = getDistance();
+        Delay.msDelay(100);
+        }
     }
 }
