@@ -1,8 +1,10 @@
 package multisensor;
 
+import lejos.hardware.Button;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.SensorPort;
-import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorMode;
+Import lejos.utility.Delay;
 
 public class LightSensor {
     private static EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S1);
@@ -40,7 +42,7 @@ public class LightSensor {
     public static float getThreshold() {
         return lightThreshold;
     }
-    
+
     public static void shutdown() {
         colorSensor.close();
     }
