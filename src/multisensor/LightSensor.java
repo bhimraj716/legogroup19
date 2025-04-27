@@ -40,4 +40,8 @@ public class LightSensor {
     public static float getThreshold() {
         return lightThreshold;
     }
+    
+    public static void shutdown() {
+        colorSensor.close();
+    }
 }
