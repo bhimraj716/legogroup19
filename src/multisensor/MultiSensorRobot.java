@@ -25,6 +25,7 @@ public class MultiSensorRobot {
 
         Thread lineFollower = new Thread(new LineFollower()); // Start LineFollower thread
         lineFollower.start();
+        UltrasonicSensor.startAvoidance();
 
         while (!Button.ESCAPE.isDown()) { // Main loop running until ESCAPE button is pressed
             Delay.msDelay(100); // Wait for a short time
@@ -37,6 +38,7 @@ public class MultiSensorRobot {
 
         // Shutdown sensors and motors
         LightSensor.shutdown();
+        UltrasonicSensor.close();
         leftMotor.close();
         rightMotor.close();
 
