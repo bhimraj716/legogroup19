@@ -47,4 +47,27 @@ public class MultiSensorRobot {
         LCD.drawString("Stopped", 0, 0);
 
     }
+    private float measureSide(boolean leftTurn) {
+        synchronized (MultiSensorRobot.motorLock) {
+            if (leftTurn) {
+                // Turn left smoothly (slower speed for smoother turns)
+                MultiSensorRobot.leftMotor.setSpeed(100);
+                MultiSensorRobot.rightMotor.setSpeed(150);
+                MultiSensorRobot.leftMotor.backward();
+                MultiSensorRobot.rightMotor.forward();
+            } else {
+                // Turn right smoothly (slower speed for smoother turns)
+                MultiSensorRobot.leftMotor.setSpeed(150);
+                MultiSensorRobot.rightMotor.setSpeed(100);
+                MultiSensorRobot.leftMotor.forward();
+                MultiSensorRobot.rightMotor.backward();
+            }
+            Delay.msDelay(300);
+
+            MultiSensorRobot.leftMotor.flt(true);
+            MultiSensorRobot.rightMotor.flt();
+            Delay.msDelay(100);
+        }
+        return getDistance();
+    }
 }
